@@ -2,7 +2,8 @@ const {
   isNumber,
   castToNumber,
   getCaster, 
-  isString
+  isString,
+  isBoolean
 } = require('../lib/types.js');
 
 describe('types functions', () => {
@@ -22,6 +23,14 @@ describe('types functions', () => {
       expect(isString({})).toBeFalsy();
       expect(isString(() => {})).toBeFalsy();
       expect(isString(true)).toBeFalsy();
+    });
+    it('properly tells if a value is a boolean', () => {
+      expect(isBoolean(true)).toBeTruthy();
+      expect(isBoolean('hi')).toBeFalsy();
+      expect(isBoolean(3)).toBeFalsy();
+      expect(isBoolean([])).toBeFalsy();
+      expect(isBoolean({})).toBeFalsy();
+      expect(isBoolean(() => {})).toBeFalsy();
     });
   });
 
