@@ -3,7 +3,8 @@ const {
   castToNumber,
   getCaster, 
   isString,
-  isBoolean
+  isBoolean,
+  isArray
 } = require('../lib/types.js');
 
 describe('types functions', () => {
@@ -31,6 +32,14 @@ describe('types functions', () => {
       expect(isBoolean([])).toBeFalsy();
       expect(isBoolean({})).toBeFalsy();
       expect(isBoolean(() => {})).toBeFalsy();
+    });
+    it('properly tells if a value is an array', () => {
+      expect(isArray([])).toBeTruthy();
+      expect(isArray(true)).toBeFalsy();
+      expect(isArray('hi')).toBeFalsy();
+      expect(isArray(3)).toBeFalsy();
+      expect(isArray({})).toBeFalsy();
+      expect(isArray(() => {})).toBeFalsy();
     });
   });
 
