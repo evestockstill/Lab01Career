@@ -5,7 +5,9 @@ const {
   isString,
   isBoolean,
   isArray,
-  isObject
+  isObject,
+  isFunction,
+  castToString
 } = require('../lib/types.js');
 
 describe('types functions', () => {
@@ -42,15 +44,16 @@ describe('types functions', () => {
       expect(isArray({})).toBeFalsy();
       expect(isArray(() => {})).toBeFalsy();
     });
-    it('properly tells if a value is an object', () => {
-      expect(isObject({})).toBeTruthy();
-      expect(isObject([])).toBeFalsy();
-      expect(isObject(true)).toBeFalsy();
-      expect(isObject('hi')).toBeFalsy();
-      expect(isObject(3)).toBeFalsy();
-      expect(isObject(() => {})).toBeFalsy();
-    });
-  });
+ 
+      it('properly tells if a value is an function', () => {
+        expect(isFunction(() => {})).toBeTruthy();
+        expect(isFunction({})).toBeFalsy();
+        expect(isFunction([])).toBeFalsy();
+        expect(isFunction(true)).toBeFalsy();
+        expect(isFunction('hi')).toBeFalsy();
+        expect(isFunction(3)).toBeFalsy();
+      });
+     });
 
   describe('casters', () => {
     it('can cast values to a number', () => {
@@ -58,6 +61,12 @@ describe('types functions', () => {
       expect(castToNumber('3')).toEqual(3);
       expect(castToNumber(true)).toEqual(1);
       expect(castToNumber(false)).toEqual(0);
+    });
+    it('can cast values to a string', () => {
+      expect(castToString(3)).toEqual('3');
+      expect(castToString('3')).toEqual('3');
+      expect(castToString(true)).toEqual('true');
+      expect(castToString(false)).toEqual('false');
     });
 
     it('throws if value is not castable to number', () => {
