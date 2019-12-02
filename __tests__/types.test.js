@@ -8,7 +8,8 @@ const {
   isObject,
   isFunction,
   castToString,
-  castToBoolean
+  castToBoolean,
+  castToArray
 } = require('../lib/types.js');
 
 describe('types functions', () => {
@@ -74,6 +75,12 @@ describe('types functions', () => {
       expect(castToBoolean('3')).toEqual(true);
       expect(castToBoolean(true)).toEqual(true);
       expect(castToBoolean(false)).toEqual(false);
+    });
+    it('can cast values to a array', () => {
+      expect(castToArray(1, 2, 3)).toEqual([1, 2, 3]);
+      // expect(castToArray([''])).toEqual(true);
+      // expect(castToArray(true)).toEqual(false);
+      // expect(castToArray(false)).toEqual([false]);
     });
 
     it('throws if value is not castable to number', () => {
