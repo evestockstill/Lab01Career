@@ -38,6 +38,14 @@ describe('types functions', () => {
       expect(isBoolean({})).toBeFalsy();
       expect(isBoolean(() => {})).toBeFalsy();
     });
+    it('properly tells if a value is a object', () => {
+      expect(isObject({})).toBeTruthy();
+      expect(isObject(true)).toBeFalsy();
+      expect(isObject('hi')).toBeFalsy();
+      expect(isObject(3)).toBeFalsy();
+      expect(isObject([])).toBeFalsy();
+      expect(isObject(() => {})).toBeFalsy();
+    });
     it('properly tells if a value is an array', () => {
       expect(isArray([])).toBeTruthy();
       expect(isArray(true)).toBeFalsy();
@@ -78,9 +86,6 @@ describe('types functions', () => {
     });
     it('can cast values to a array', () => {
       expect(castToArray(1, 2, 3)).toEqual([1, 2, 3]);
-      // expect(castToArray([''])).toEqual(true);
-      // expect(castToArray(true)).toEqual(false);
-      // expect(castToArray(false)).toEqual([false]);
     });
 
     it('throws if value is not castable to number', () => {
